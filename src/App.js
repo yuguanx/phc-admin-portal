@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
-import Routes from "./Routes";
 import Login from "./containers/Login";
+import { Switch, Route } from 'react-router-dom';
+import AdminPlatform from './containers/AdminPlatform';
 import './App.css';
 
 class App extends Component {
@@ -11,7 +11,10 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Project Homeless Connect Admin Platform</h1>
         </header>
-        <Login />
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <Route path='/portal' component={AdminPlatform} />
+        </Switch>
       </div>
     );
   }

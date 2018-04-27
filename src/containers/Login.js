@@ -8,7 +8,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      loginFailed: false
     };
   }
 
@@ -24,6 +25,25 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+    fetch('/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        'email': this.state.email,
+        'password': this.state.password,
+      }),
+      headers: {
+        'content-type': 'application/json',
+      }
+    })
+    .then(res => res.json())
+    .catch(error => {
+      console.error('Error occured while logging in:', error);
+      this.setState({loginFailed: true});
+    })
+    .then(data => {
+      if (data.loginSuccess === true) this.props.
+      else this.setState({loginFailed: true});
+    });
   }
 
   render() {
@@ -55,6 +75,7 @@ export default class Login extends Component {
           >
             Login
           </Button>
+        {this.state.loginFailed && <p className="error-msg">Login failed</p>}
         </form>
       </div>
     );
