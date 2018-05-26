@@ -9,16 +9,16 @@ export default class AdminPlatform extends Component {
   }
 
   componentWillMount() {
-    fetch('/getForm', {
+    fetch('/api/getForm', {
       method: 'GET',
-      body: '', // Potentially add one more step of login credential check here
+      body: ''
     })
     .then(res => res.json())
-    .catch(error => console.error('Error while fetching form data:', error))
-    .then(res => this.setState(res));
+    .catch(error => console.error('Error while fetching form data: ', error))
+    .then(res => this.setState(res))
   }
 
   render() {
-    return (<h1>Hi!</h1>);
+    return (<h1>Hi!</h1>)
   }
 }
